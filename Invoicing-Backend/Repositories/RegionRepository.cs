@@ -11,4 +11,5 @@ public class RegionRepository : BaseRepository<Region>, IRegionRepository
 
     public async Task<Region?> GetRegionByCodeAsync(string code) => await dbset
         .FirstOrDefaultAsync(x => EF.Property<string>(x, "Code") == code);
+    
 }
