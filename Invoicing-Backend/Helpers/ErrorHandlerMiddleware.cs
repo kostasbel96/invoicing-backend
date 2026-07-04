@@ -26,25 +26,50 @@ public class ErrorHandlerMiddleware
 
             response.StatusCode = exception switch
             {
-                CustomerEmailAlreadyExistsException => (int) HttpStatusCode.BadRequest,   // 400
+                CustomerEmailAlreadyExistsException => (int) HttpStatusCode.BadRequest, // 400
+                ValidationException => (int) HttpStatusCode.BadRequest, //400
                 _ => (int) HttpStatusCode.InternalServerError
             };
-
-            var result = exception is AppException appException
-                ? JsonSerializer.Serialize(new
-                {
-                    code = appException.Code,
-                    message = appException.Message,
-                    statusCode = response.StatusCode
-                })
-                : JsonSerializer.Serialize(new
-                {
-                    code = "internalError",
-                    message = exception.Message,
-                    statusCode = response.StatusCode
-                });
-
+            string result =  BuildJsonResult(exception, response);
             await response.WriteAsync(result);
         }
+    }
+
+    private string BuildJsonResult(Exception exception, HttpResponse response)
+    {
+        string result;
+        switch (exception)
+        {
+            case CustomerEmailAlreadyExistsException ex:
+                result = JsonSerializer.Serialize(new
+                    {
+                        code = ex.Code,
+                        message = ex.Message,
+                        statusCode = response.StatusCode
+                    }
+                );
+                break;
+            case ValidationException ex:
+                result = JsonSerializer.Serialize(new
+                    {
+                        code = ex.Code,
+                        message = ex.Message,
+                        errors = ex.Errors,
+                        statusCode = response.StatusCode
+                    }
+                );
+                break;
+            default:
+                result = JsonSerializer.Serialize(new
+                    {
+                        code = "internalError",
+                        message = exception.Message,
+                        statusCode = response.StatusCode
+                    }
+                );
+                break;
+                
+        }
+        return result;
     }
 }

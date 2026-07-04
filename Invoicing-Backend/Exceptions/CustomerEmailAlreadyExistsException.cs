@@ -2,9 +2,9 @@
 
 public class CustomerEmailAlreadyExistsException : AppException
 {
-    private static readonly string MESSAGE = "Customer email already exists";
-    private static readonly string CODE = "emailAlreadyExists";
-    public CustomerEmailAlreadyExistsException() : base(CODE, MESSAGE)
+    private const string Message = "Customer email already exists";
+    private const string Code = "emailAlreadyExists";
+    public CustomerEmailAlreadyExistsException() : base(Code, Message)
     {
     }
 }

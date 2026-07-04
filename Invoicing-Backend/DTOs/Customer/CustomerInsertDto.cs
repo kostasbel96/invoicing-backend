@@ -7,28 +7,28 @@ public class CustomerInsertDto
 {
     [Required(ErrorMessage = "The {0} field is required.")]
     [StringLength(50, MinimumLength = 2, ErrorMessage = "Firstname must be between 2 and 50 characters.")]
-    public string? Firstname { get; set; }
-    
+    public string Firstname { get; set; } = null!;
+
     [Required(ErrorMessage = "The {0} field is required.")]
     [StringLength(50, MinimumLength = 2, ErrorMessage = "Lastname must be between 2 and 50 characters.")]
-    public string? Lastname { get; set; }
+    public string Lastname { get; set; } = null!;
     
     [EmailAddress(ErrorMessage = "Invalid email address.")]
     public string? Email { get; set; }
-
+    
     [Required(ErrorMessage = "The {0} field is required.")]
-    [StringLength(15, MinimumLength = 10,
-        ErrorMessage = "Phone number must be at least 10 characters and not exceed 15 characters.")]
+    [RegularExpression(@"^\d{10,}$", ErrorMessage = "Phone must contain at least 10 digits.")]
     public string Phone { get; set; } = null!;
     
     public string? Address { get; set; }
     public string? PostalCode { get; set; }
     
-    [RegularExpression(@"^$|^\d{10}$", ErrorMessage = "Vat number must contain exactly 10 digits.")]
-    public string? Vat { get; set; }
+    [Required(ErrorMessage = "The {0} field is required.")]
+    [RegularExpression(@"^\d{9,10}$", ErrorMessage = "VAT must contain 9 or 10 digits only.")]
+    public string Vat { get; set; } = null!;
     
     public string? CompanyName { get; set; }
-    
-    // [Required(ErrorMessage = "The {0} field is required.")]
+
+    [Required(ErrorMessage = "The {0} field is required.")]
     public int RegionId { get; set; }
 }

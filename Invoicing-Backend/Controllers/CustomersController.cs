@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Invoicing_Backend.DTOs;
+using Invoicing_Backend.Exceptions;
 using Invoicing_Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,14 @@ public class CustomersController : BaseController
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            var errors = ModelState
+                .Where(e => e.Value!.Errors.Any())
+                .ToDictionary(
+                    e => e.Key,
+                    e => e.Value!.Errors
+                        .Select(error => error.ErrorMessage)
+                        .ToArray());
+            throw new ValidationException(errors);
         }
         var returnedCustomer =  await _applicationService.CustomerService.AddAsync(customerInsertDto);
         return CreatedAtAction(nameof(GetCustomerById), new { id = returnedCustomer.Id }, returnedCustomer);
