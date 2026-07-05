@@ -4,8 +4,6 @@ using Invoicing_Backend.DTOs;
 using Invoicing_Backend.Exceptions;
 using Invoicing_Backend.Models;
 using Invoicing_Backend.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Serilog;
 
 namespace Invoicing_Backend.Services;
 
@@ -38,15 +36,24 @@ public class CustomerService : ICustomerService
     {
         try
         {
+            if (dto.Vat != null && await _unitOfWork.CustomerRepository.VatExistsAsync(dto.Vat))
+            {
+                _logger.LogWarning("Vat already exists: {Vat}", dto.Vat);
+                throw new CustomerFieldAlreadyExistsException("VatAlreadyExists", 
+                    "Vat " + dto.Vat + " already exists");
+            }
+
             if (dto.Email != null && await _unitOfWork.CustomerRepository.EmailExistsAsync(dto.Email))
             {
                 _logger.LogWarning("Email already exists: {Email}", dto.Email);
-                throw new CustomerEmailAlreadyExistsException();
+                throw new CustomerFieldAlreadyExistsException("EmailAlreadyExists", 
+                    "Email " + dto.Email + " already exists");
             }
             if (await _unitOfWork.CustomerRepository.EmailExistsAsync(dto.Phone))
             {
                 _logger.LogWarning("Phone already exists: {Phone}", dto.Phone);
-                throw new CustomerPhoneAlreadyExistsException();
+                throw new CustomerFieldAlreadyExistsException("PhoneAlreadyExists", 
+                    "Phone " + dto.Phone + " already exists");
             }
             Customer customer = _mapper.Map<Customer>(dto);
             await _unitOfWork.CustomerRepository.AddAsync(customer);
@@ -65,15 +72,24 @@ public class CustomerService : ICustomerService
     {
         try
         {
+            if (dto.Vat != null && await _unitOfWork.CustomerRepository.VatExistsForOtherAsync(uuid, dto.Vat))
+            {
+                _logger.LogWarning("Vat already exists: {Vat}", dto.Vat);
+                throw new CustomerFieldAlreadyExistsException("VatAlreadyExists",
+                    "Vat " + dto.Vat + " already exists");
+            }
+
             if (dto.Email != null && await _unitOfWork.CustomerRepository.EmailExistsForOtherAsync(uuid, dto.Email))
             {
                 _logger.LogWarning("Email already exists: {Email}", dto.Email);
-                throw new CustomerEmailAlreadyExistsException();
+                throw new CustomerFieldAlreadyExistsException("EmailAlreadyExists", 
+                    "Email " + dto.Email + " already exists");
             }
             if (dto.Phone != null && await _unitOfWork.CustomerRepository.EmailExistsForOtherAsync(uuid, dto.Phone))
             {
                 _logger.LogWarning("Email already exists: {Phone}", dto.Phone);
-                throw new CustomerPhoneAlreadyExistsException();
+                throw new CustomerFieldAlreadyExistsException("PhoneAlreadyExists", 
+                    "Phone " + dto.Phone + " already exists");
             }
 
             Customer? customer = await _unitOfWork.CustomerRepository.GetByUuidAsync(uuid);

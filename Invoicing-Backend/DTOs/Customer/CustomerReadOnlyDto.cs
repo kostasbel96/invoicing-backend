@@ -10,6 +10,6 @@ public class CustomerReadOnlyDto : BaseReadOnlyDto
     public string PostalCode { get; set; } = null!;
     public string? Vat { get; set; }
     public string? CompanyName { get; set; }
-    public RegionReadOnlyDto Region { get; set; } = null!;
+    public int RegionId { get; set; }
     public decimal Balance { get; set; }
 }

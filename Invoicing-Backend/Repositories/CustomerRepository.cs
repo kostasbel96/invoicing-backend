@@ -76,4 +76,16 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
             x.Phone == phone &&
             x.Uuid != uuid);
     }
+    
+    public async Task<bool> VatExistsAsync(string vat)
+    {
+        return await dbset.AnyAsync(x => x.Vat == vat);
+    }
+    
+    public async Task<bool> VatExistsForOtherAsync(Guid uuid, string vat)
+    {
+        return await dbset.AnyAsync(x =>
+            x.Vat == vat &&
+            x.Uuid != uuid);
+    }
 }

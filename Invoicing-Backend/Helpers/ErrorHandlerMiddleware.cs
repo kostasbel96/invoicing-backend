@@ -26,7 +26,7 @@ public class ErrorHandlerMiddleware
 
             response.StatusCode = exception switch
             {
-                CustomerEmailAlreadyExistsException => (int) HttpStatusCode.BadRequest, // 400
+                CustomerFieldAlreadyExistsException => (int) HttpStatusCode.BadRequest, // 400
                 ValidationException => (int) HttpStatusCode.BadRequest, //400
                 _ => (int) HttpStatusCode.InternalServerError
             };
@@ -40,7 +40,7 @@ public class ErrorHandlerMiddleware
         string result;
         switch (exception)
         {
-            case CustomerEmailAlreadyExistsException ex:
+            case CustomerFieldAlreadyExistsException ex:
                 result = JsonSerializer.Serialize(new
                     {
                         code = ex.Code,

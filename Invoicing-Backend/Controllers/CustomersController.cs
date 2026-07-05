@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Invoicing_Backend.DTOs;
 using Invoicing_Backend.Exceptions;
+using Invoicing_Backend.Models;
 using Invoicing_Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,5 +37,14 @@ public class CustomersController : BaseController
         var customer = await _applicationService.CustomerService.GetCustomerByIdAsync(id);
         if (customer is null) return NotFound();
         return Ok(customer);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<PaginatedResult<CustomerReadOnlyDto>>> GetCustomers([FromQuery] int page,
+        int pageSize)
+    {
+        var customers = await _applicationService.CustomerService
+            .GetPaginatedCustomersAsync(page, pageSize);
+        return Ok(customers);
     }
 }
