@@ -1,4 +1,6 @@
-﻿namespace Invoicing_Backend.DTOs;
+﻿using Invoicing_Backend.Data;
+
+namespace Invoicing_Backend.DTOs;
 
 public class CustomerReadOnlyDto : BaseReadOnlyDto
 {
@@ -10,6 +12,6 @@ public class CustomerReadOnlyDto : BaseReadOnlyDto
     public string PostalCode { get; set; } = null!;
     public string? Vat { get; set; }
     public string? CompanyName { get; set; }
-    public int RegionId { get; set; }
+    public RegionReadOnlyDto Region { get; set; }
     public decimal Balance { get; set; }
 }

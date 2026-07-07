@@ -1,12 +1,13 @@
 ﻿namespace Invoicing_Backend.Exceptions;
 
-public class ValidationException : AppException
+public class ValidationException : Exception
 {
     public IReadOnlyDictionary<string, string[]> Errors { get; }
-    private const string Code = "ValidationException";
+    public string Code { get; init; }
 
-    public ValidationException(IReadOnlyDictionary<string, string[]> errors) : base(Code, "Validation failed")
+    public ValidationException(IReadOnlyDictionary<string, string[]> errors, String message, String code) : base(message)
     {
         Errors = errors;
+        Code = code;
     }
 }

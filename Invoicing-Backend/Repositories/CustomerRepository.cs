@@ -21,6 +21,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
             
         var customers = await context.Customers
             .Where(x => x.IsActive)
+            .Include(x => x.Region)
             .OrderBy(x => x.Id)
             .Skip(skip)
             .Take(pageSize)

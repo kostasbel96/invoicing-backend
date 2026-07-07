@@ -40,7 +40,7 @@ public class ErrorHandlerMiddleware
         string result;
         switch (exception)
         {
-            case CustomerFieldAlreadyExistsException ex:
+            case AppException ex:
                 result = JsonSerializer.Serialize(new
                     {
                         code = ex.Code,

@@ -25,7 +25,7 @@ public class CustomersController : BaseController
                     e => e.Value!.Errors
                         .Select(error => error.ErrorMessage)
                         .ToArray());
-            throw new ValidationException(errors);
+            throw new ValidationException(errors, "Validation Error", "ValidationError");
         }
         var returnedCustomer =  await _applicationService.CustomerService.AddAsync(customerInsertDto);
         return CreatedAtAction(nameof(GetCustomerById), new { id = returnedCustomer.Id }, returnedCustomer);
