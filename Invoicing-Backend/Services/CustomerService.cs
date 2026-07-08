@@ -128,7 +128,8 @@ public class CustomerService : ICustomerService
     {
         try
         {
-            Customer? customer = await _unitOfWork.CustomerRepository.GetByUuidAsync(uuid);
+            Customer? customer = await _unitOfWork.CustomerRepository
+                .GetByUuidAsync(uuid, x => x.Region);
             if (customer is null)
             {
                 _logger.LogWarning("Customer with Uuid {Uuid} not found", uuid);

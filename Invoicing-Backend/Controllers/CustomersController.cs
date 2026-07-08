@@ -38,6 +38,14 @@ public class CustomersController : BaseController
         if (customer is null) return NotFound();
         return Ok(customer);
     }
+    
+    [HttpGet("by-uuid/{uuid::guid}")]
+    public async Task<ActionResult<CustomerReadOnlyDto>> GetCustomerByUuid([FromRoute] Guid uuid)
+    {
+        var customer = await _applicationService.CustomerService.GetCustomerByUuidAsync(uuid);
+        if (customer is null) return NotFound();
+        return Ok(customer);
+    }
 
     [HttpGet]
     public async Task<ActionResult<PaginatedResult<CustomerReadOnlyDto>>> GetCustomers([FromQuery] int page,
