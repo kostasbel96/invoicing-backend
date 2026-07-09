@@ -17,7 +17,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
             .Where(x => x.IsActive)
             .CountAsync();
 
-        int skip = (pageNumber - 1) * pageSize;
+        int skip = (pageNumber) * pageSize;
             
         var customers = await context.Customers
             .Where(x => x.IsActive)
