@@ -8,7 +8,7 @@ public class Customer : BaseEntity
     public string Phone { get; set; } = null!;
     public string Address { get; set; } = null!;
     public string PostalCode { get; set; } = null!;
-    public string? Vat { get; set; }
+    public string Vat { get; set; } = null!;
     public string? CompanyName { get; set; }
     public decimal Balance { get; set; }
     public int RegionId { get; set; }

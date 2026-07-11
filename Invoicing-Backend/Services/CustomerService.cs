@@ -19,9 +19,9 @@ public class CustomerService : ICustomerService
         _mapper = mapper;
         _logger = logger;
     }
-    public async Task<PaginatedResult<CustomerReadOnlyDto>> GetPaginatedCustomersAsync(int pageNumber, int pageSize)
+    public async Task<PaginatedResult<CustomerReadOnlyDto>> GetPaginatedCustomersAsync(int pageNumber, int pageSize, string searchTerm)
     {
-        PaginatedResult<Customer> result = await _unitOfWork.CustomerRepository.GetPaginatedCustomersAsync(pageNumber, pageSize);
+        PaginatedResult<Customer> result = await _unitOfWork.CustomerRepository.GetPaginatedCustomersAsync(pageNumber, pageSize, searchTerm);
 
         return new PaginatedResult<CustomerReadOnlyDto>
         {

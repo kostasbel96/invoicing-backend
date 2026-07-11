@@ -11,16 +11,26 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
     }
 
-    public async Task<PaginatedResult<Customer>> GetPaginatedCustomersAsync(int pageNumber, int pageSize)
+    public async Task<PaginatedResult<Customer>> GetPaginatedCustomersAsync(int pageNumber, int pageSize, string searchTerm)
     {
-        var totalRecords = await context.Customers
+        var query = context.Customers
             .Where(x => x.IsActive)
-            .CountAsync();
+            .AsQueryable();
 
-        int skip = (pageNumber) * pageSize;
-            
-        var customers = await context.Customers
-            .Where(x => x.IsActive)
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            query = query.Where(x =>
+                x.Phone.Contains(searchTerm) ||
+                x.Vat.Contains(searchTerm) ||
+                x.Firstname.Contains(searchTerm) ||
+                x.Lastname.Contains(searchTerm));
+        }
+
+        var totalRecords = await query.CountAsync();
+
+        int skip = pageNumber * pageSize;
+
+        var customers = await query
             .Include(x => x.Region)
             .OrderBy(x => x.Id)
             .Skip(skip)
@@ -34,7 +44,6 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
             PageNumber = pageNumber,
             PageSize = pageSize
         };
-
     }
 
     public async Task AddAsync(Customer customer) => await dbset.AddAsync(customer);

@@ -20,8 +20,12 @@ public class CustomerUpdateDto
     [RegularExpression(@"^\d{10,}$", ErrorMessage = "Phone must contain at least 10 digits.")]
     public string Phone { get; set; } = null!;
     
-    public string? Address { get; set; }
-    public string? PostalCode { get; set; }
+    [Required(ErrorMessage = "The {0} field is required.")]
+    public string Address { get; set; } = null!;
+
+    [Required(ErrorMessage = "The {0} field is required.")]
+    [RegularExpression(@"^\d{5}$", ErrorMessage = "Postal code must be 5 digits.")]
+    public string PostalCode { get; set; } = null!;
     
     [Required(ErrorMessage = "The {0} field is required.")]
     [RegularExpression(@"^\d{9,10}$", ErrorMessage = "VAT must contain 9 or 10 digits only.")]

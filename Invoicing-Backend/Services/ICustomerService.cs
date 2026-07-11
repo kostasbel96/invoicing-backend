@@ -5,7 +5,8 @@ namespace Invoicing_Backend.Services;
 
 public interface ICustomerService
 {
-    Task<PaginatedResult<CustomerReadOnlyDto>> GetPaginatedCustomersAsync(int pageNumber, int pageSize);
+    Task<PaginatedResult<CustomerReadOnlyDto>> GetPaginatedCustomersAsync(int pageNumber, 
+        int pageSize, string searchTerm);
     Task<CustomerReadOnlyDto> AddAsync(CustomerInsertDto dto);
     Task<CustomerReadOnlyDto?> UpdateAsync(Guid uuid, CustomerUpdateDto dto);
     Task<bool> DeleteAsync(Guid uuid);
