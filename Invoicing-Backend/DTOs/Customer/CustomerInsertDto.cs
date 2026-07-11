@@ -14,6 +14,7 @@ public class CustomerInsertDto
     public string Lastname { get; set; } = null!;
     
     [EmailAddress(ErrorMessage = "Invalid email address.")]
+    [Required(ErrorMessage =  "The {0} field is required.")]
     public string? Email { get; set; }
     
     [Required(ErrorMessage = "The {0} field is required.")]

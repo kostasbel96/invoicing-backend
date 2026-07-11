@@ -23,7 +23,8 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
                 x.Phone.Contains(searchTerm) ||
                 x.Vat.Contains(searchTerm) ||
                 x.Firstname.Contains(searchTerm) ||
-                x.Lastname.Contains(searchTerm));
+                x.Lastname.Contains(searchTerm) ||
+                x.Email.Contains(searchTerm));
         }
 
         var totalRecords = await query.CountAsync();
