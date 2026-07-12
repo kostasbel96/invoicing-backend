@@ -11,7 +11,11 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
     }
 
-    public async Task<PaginatedResult<Customer>> GetPaginatedCustomersAsync(int pageNumber, int pageSize, string searchTerm)
+    public async Task<PaginatedResult<Customer>> GetPaginatedCustomersAsync(int pageNumber, 
+        int pageSize, 
+        string searchTerm,
+        string sortField,
+        string sortOrder)
     {
         var query = context.Customers
             .Where(x => x.IsActive)
@@ -26,6 +30,49 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
                 x.Lastname.Contains(searchTerm) ||
                 x.Email.Contains(searchTerm));
         }
+        if (!string.IsNullOrEmpty(sortField))
+        {
+            switch (sortField.ToLower())
+            {
+                case "firstname":
+                    query = sortOrder == "ASC"
+                        ? query.OrderBy(x => x.Firstname)
+                        : query.OrderByDescending(x => x.Firstname);
+                    break;
+
+                case "lastname":
+                    query = sortOrder == "ASC"
+                        ? query.OrderBy(x => x.Lastname)
+                        : query.OrderByDescending(x => x.Lastname);
+                    break;
+
+                case "companyname":
+                    query = sortOrder == "ASC"
+                        ? query.OrderBy(x => x.CompanyName)
+                        : query.OrderByDescending(x => x.CompanyName);
+                    break;
+
+                case "balance":
+                    query = sortOrder == "ASC"
+                        ? query.OrderBy(x => x.Balance)
+                        : query.OrderByDescending(x => x.Balance);
+                    break;
+
+                case "regionname":
+                    query = sortOrder == "ASC"
+                        ? query.OrderBy(x => x.Region.Name)
+                        : query.OrderByDescending(x => x.Region.Name);
+                    break;
+
+                default:
+                    query = query.OrderBy(x => x.Id);
+                    break;
+            }
+        }
+        else
+        {
+            query = query.OrderBy(x => x.Id);
+        }
 
         var totalRecords = await query.CountAsync();
 
@@ -33,7 +80,6 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 
         var customers = await query
             .Include(x => x.Region)
-            .OrderBy(x => x.Id)
             .Skip(skip)
             .Take(pageSize)
             .ToListAsync();

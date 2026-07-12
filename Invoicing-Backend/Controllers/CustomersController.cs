@@ -50,10 +50,12 @@ public class CustomersController : BaseController
     [HttpGet]
     public async Task<ActionResult<PaginatedResult<CustomerReadOnlyDto>>> GetCustomers([FromQuery] int page,
         [FromQuery] int pageSize,
-        [FromQuery] string search = "")
+        [FromQuery] string search = "",
+        [FromQuery] string sortField = "Id",
+        [FromQuery] string sortOrder = "ASC")
     {
         var customers = await _applicationService.CustomerService
-            .GetPaginatedCustomersAsync(page, pageSize, search);
+            .GetPaginatedCustomersAsync(page, pageSize, search, sortField, sortOrder);
         return Ok(customers);
     }
 }

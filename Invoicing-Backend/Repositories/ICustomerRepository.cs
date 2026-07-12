@@ -5,7 +5,8 @@ namespace Invoicing_Backend.Repositories;
 
 public interface ICustomerRepository
 {
-    Task<PaginatedResult<Customer>> GetPaginatedCustomersAsync(int pageNumber, int pageSize, string searchTerm);
+    Task<PaginatedResult<Customer>> GetPaginatedCustomersAsync(int pageNumber, int pageSize, 
+        string searchTerm, string sortField, string sortOrder);
     Task AddAsync(Customer customer);
     Task UpdateAsync(Customer customer);
     Task<bool> DeleteAsync(int id);
