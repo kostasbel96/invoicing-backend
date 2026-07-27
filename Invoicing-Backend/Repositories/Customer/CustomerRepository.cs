@@ -80,6 +80,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 
         var customers = await query
             .Include(x => x.Region)
+            .Include(x => x.TaxOffice)
             .Skip(skip)
             .Take(pageSize)
             .ToListAsync();

@@ -1,4 +1,5 @@
 ﻿using Invoicing_Backend.Data;
+using Invoicing_Backend.DTOs.TaxOffice;
 
 namespace Invoicing_Backend.DTOs;
 
@@ -13,5 +14,6 @@ public class CustomerReadOnlyDto : BaseReadOnlyDto
     public string? Vat { get; set; }
     public string? CompanyName { get; set; }
     public RegionReadOnlyDto Region { get; set; }
+    public TaxOfficeReadOnlyDto TaxOffice { get; set; }
     public decimal Balance { get; set; }
 }

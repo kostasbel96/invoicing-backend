@@ -25,7 +25,8 @@ public class CustomerService : ICustomerService
         string sortField,
         string sortOrder)
     {
-        PaginatedResult<Customer> result = await _unitOfWork.CustomerRepository.GetPaginatedCustomersAsync(pageNumber, 
+        PaginatedResult<Customer> result = await _unitOfWork.CustomerRepository
+            .GetPaginatedCustomersAsync(pageNumber, 
             pageSize, 
             searchTerm,
             sortField,
@@ -137,7 +138,10 @@ public class CustomerService : ICustomerService
         try
         {
             Customer? customer = await _unitOfWork.CustomerRepository
-                .GetByUuidAsync(uuid, x => x.Region);
+                .GetByUuidAsync(uuid, 
+                   (x => x.Region), 
+                                (x => x.TaxOffice)
+                );
             if (customer is null)
             {
                 _logger.LogWarning("Customer with Uuid {Uuid} not found", uuid);
