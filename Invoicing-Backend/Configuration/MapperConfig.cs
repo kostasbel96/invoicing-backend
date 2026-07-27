@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Invoicing_Backend.Data;
 using Invoicing_Backend.DTOs;
+using Invoicing_Backend.DTOs.TaxOffice;
 
 namespace Invoicing_Backend.Configuration;
 
@@ -15,6 +16,9 @@ public class MapperConfig : Profile
         
         //REGION
         CreateMap<Region, RegionReadOnlyDto>();
+        
+        //TAX_OFFICE
+        CreateMap<TaxOffice, TaxOfficeReadOnlyDto>();
     }
     
 }

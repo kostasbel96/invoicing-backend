@@ -13,4 +13,6 @@ public class Customer : BaseEntity
     public decimal Balance { get; set; }
     public int RegionId { get; set; }
     public Region Region { get; set; } = null!;
+    public int TaxOfficeId { get; set; }
+    public TaxOffice TaxOffice { get; set; } = null!;
 }

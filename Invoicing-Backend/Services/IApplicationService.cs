@@ -4,4 +4,5 @@ public interface IApplicationService
 {
     CustomerService CustomerService { get; }
     RegionService RegionService { get; }
+    TaxOfficeService TaxOfficeService { get; }
 }

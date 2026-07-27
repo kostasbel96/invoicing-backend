@@ -36,4 +36,7 @@ public class CustomerInsertDto
 
     [Required(ErrorMessage = "The {0} field is required.")]
     public int RegionId { get; set; }
+    
+    [Required(ErrorMessage = "The {0} field is required.")]
+    public int TaxOfficeId { get; set; }
 }

@@ -18,4 +18,5 @@ public class ApplicationService : IApplicationService
 
     public CustomerService CustomerService => new(_unitOfWork, _mapper, _loggerFactory.CreateLogger<CustomerService>());
     public RegionService RegionService => new(_unitOfWork, _mapper);
+    public TaxOfficeService TaxOfficeService => new(_unitOfWork, _mapper);
 }

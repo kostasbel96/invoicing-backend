@@ -21,7 +21,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 1,
                 Uuid = Guid.NewGuid(),
-                Name = "Αττική",
+                Name = "ΑΤΤΙΚΗ",
                 Code = "AT",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -30,7 +30,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 2,
                 Uuid = Guid.NewGuid(),
-                Name = "Θεσσαλία",
+                Name = "ΘΕΣΣΑΛΙΑ",
                 Code = "TH",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -39,7 +39,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 3,
                 Uuid = Guid.NewGuid(),
-                Name = "Μακεδονία",
+                Name = "ΜΑΚΕΔΟΝΙΑ",
                 Code = "MA",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -48,7 +48,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 4,
                 Uuid = Guid.NewGuid(),
-                Name = "Πελοπόννησος",
+                Name = "ΠΕΛΟΠΟΝΝΗΣΟΣ",
                 Code = "PE",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -57,7 +57,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 5,
                 Uuid = Guid.NewGuid(),
-                Name = "Κρήτη",
+                Name = "ΚΡΗΤΗ",
                 Code = "CR",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -66,7 +66,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 6,
                 Uuid = Guid.NewGuid(),
-                Name = "Ιόνιο",
+                Name = "ΙΟΝΙΟ",
                 Code = "IO",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -75,7 +75,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 7,
                 Uuid = Guid.NewGuid(),
-                Name = "Ανατολικό Αιγαίο",
+                Name = "ΑΝΑΤΟΛΙΚΟ ΑΙΓΑΙΟ",
                 Code = "EA",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -84,7 +84,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 8,
                 Uuid = Guid.NewGuid(),
-                Name = "Δυτική Ελλάδα",
+                Name = "ΔΥΤΙΚΗ ΕΛΛΑΔΑ",
                 Code = "WG",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -93,7 +93,7 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 9,
                 Uuid = Guid.NewGuid(),
-                Name = "Κεντρική Ελλάδα",
+                Name = "ΚΕΝΤΡΙΚΗ ΕΛΛΑΔΑ",
                 Code = "CG",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
@@ -102,11 +102,71 @@ public class InvoicingAppDbContext : DbContext
             {
                 Id = 10,
                 Uuid = Guid.NewGuid(),
-                Name = "Βόρειο Αιγαίο",
+                Name = "ΒΟΡΕΙΟ ΑΙΓΑΙΟ",
                 Code = "NA",
                 InsertedAt = DateTime.UtcNow,
                 ModifiedAt = DateTime.UtcNow
             }
+        );
+        
+        modelBuilder.Entity<TaxOffice>().HasData(
+            new TaxOffice { Id = 1, Uuid = Guid.NewGuid(), Name = "ΔΟΥ Α' ΑΘΗΝΩΝ", Code = "ATH1", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 2, Uuid = Guid.NewGuid(), Name = "ΔΟΥ Β' ΑΘΗΝΩΝ", Code = "ATH2", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 3, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΓΛΥΦΑΔΑΣ", Code = "GLY", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 4, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΜΑΡΟΥΣΙΟΥ", Code = "AMA", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 5, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΓΙΩΝ ΑΝΑΡΓΥΡΩΝ", Code = "AAN", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 6, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΧΟΛΑΡΓΟΥ", Code = "HOL", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 7, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΚΗΦΙΣΙΑΣ", Code = "KIF", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 8, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΝΕΑΣ ΙΩΝΙΑΣ", Code = "NIO", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 9, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΠΑΛΛΗΝΗΣ", Code = "PAL", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 10, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΠΕΡΙΣΤΕΡΙΟΥ", Code = "PER", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 11, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΙΓΑΛΕΩ", Code = "AIG", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 12, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΚΑΛΛΙΘΕΑΣ", Code = "KAL", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 13, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΠΕΙΡΑΙΑ", Code = "PEI", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 14, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΝΙΚΑΙΑΣ", Code = "NIK", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 15, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΘΕΣΣΑΛΟΝΙΚΗΣ", Code = "THE", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 16, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΚΑΛΑΜΑΡΙΑΣ", Code = "KAM", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 17, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΜΠΕΛΟΚΗΠΩΝ", Code = "AMP", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 18, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΛΕΞΑΝΔΡΟΥΠΟΛΗΣ", Code = "ALE", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 19, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΔΡΑΜΑΣ", Code = "DRA", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 20, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΚΑΒΑΛΑΣ", Code = "KAV", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 21, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΞΑΝΘΗΣ", Code = "XAN", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 22, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΚΟΜΟΤΗΝΗΣ", Code = "KOM", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 23, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΙΩΑΝΝΙΝΩΝ", Code = "IOA", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 24, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΡΤΑΣ", Code = "ART", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 25, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΠΡΕΒΕΖΑΣ", Code = "PRE", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 26, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΗΓΟΥΜΕΝΙΤΣΑΣ", Code = "IGO", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 27, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΛΑΡΙΣΑΣ", Code = "LAR", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 28, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΒΟΛΟΥ", Code = "VOL", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 29, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΤΡΙΚΑΛΩΝ", Code = "TRI", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 30, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΚΑΡΔΙΤΣΑΣ", Code = "KAR", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 31, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΠΑΤΡΩΝ", Code = "PAT", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 32, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΓΡΙΝΙΟΥ", Code = "AGR", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 33, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΠΥΡΓΟΥ", Code = "PYR", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 34, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΜΕΣΟΛΟΓΓΙΟΥ", Code = "MES", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 35, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΚΟΡΙΝΘΟΥ", Code = "KOR", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 36, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΡΓΟΥΣ", Code = "ARG", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 37, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΝΑΥΠΛΙΟΥ", Code = "NAF", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 38, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΣΠΑΡΤΗΣ", Code = "SPA", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 39, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΤΡΙΠΟΛΗΣ", Code = "TRP", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 40, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΗΡΑΚΛΕΙΟΥ", Code = "HER", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 41, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΧΑΝΙΩΝ", Code = "CHA", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 42, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΡΕΘΥΜΝΟΥ", Code = "RET", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 43, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΑΓΙΟΥ ΝΙΚΟΛΑΟΥ", Code = "AGN", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+
+            new TaxOffice { Id = 44, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΡΟΔΟΥ", Code = "ROD", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 45, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΚΩ", Code = "KOS", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 46, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΜΥΤΙΛΗΝΗΣ", Code = "MYT", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 47, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΧΙΟΥ", Code = "CHI", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
+            new TaxOffice { Id = 48, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΣΑΜΟΥ", Code = "SAM", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow }
         );
 
         modelBuilder.Entity<Customer>(entity =>
@@ -114,6 +174,10 @@ public class InvoicingAppDbContext : DbContext
             entity.HasOne(c => c.Region)
                 .WithMany(r => r.Customers)
                 .HasForeignKey(c => c.RegionId);
+            
+            entity.HasOne(c => c.TaxOffice)
+                .WithMany()
+                .HasForeignKey(c => c.TaxOfficeId);
 
             entity.HasIndex(c => c.Email).IsUnique();
             entity.HasIndex(c => c.Phone).IsUnique();
