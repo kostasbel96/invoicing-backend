@@ -58,7 +58,7 @@ public class CustomerService : ICustomerService
                 throw new CustomerFieldAlreadyExistsException("EmailAlreadyExists", 
                     "Email " + dto.Email + " already exists");
             }
-            if (await _unitOfWork.CustomerRepository.EmailExistsAsync(dto.Phone))
+            if (await _unitOfWork.CustomerRepository.PhoneExistsAsync(dto.Phone))
             {
                 _logger.LogWarning("Phone already exists: {Phone}", dto.Phone);
                 throw new CustomerFieldAlreadyExistsException("PhoneAlreadyExists", 
@@ -94,9 +94,9 @@ public class CustomerService : ICustomerService
                 throw new CustomerFieldAlreadyExistsException("EmailAlreadyExists", 
                     "Email " + dto.Email + " already exists");
             }
-            if (dto.Phone != null && await _unitOfWork.CustomerRepository.EmailExistsForOtherAsync(uuid, dto.Phone))
+            if (dto.Phone != null && await _unitOfWork.CustomerRepository.PhoneExistsForOtherAsync(uuid, dto.Phone))
             {
-                _logger.LogWarning("Email already exists: {Phone}", dto.Phone);
+                _logger.LogWarning("Phone already exists: {Phone}", dto.Phone);
                 throw new CustomerFieldAlreadyExistsException("PhoneAlreadyExists", 
                     "Phone " + dto.Phone + " already exists");
             }

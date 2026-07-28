@@ -31,6 +31,31 @@ public class CustomersController : BaseController
         return CreatedAtAction(nameof(GetCustomerById), new { id = returnedCustomer.Id }, returnedCustomer);
     }
 
+    [HttpPatch("Update/{uuid::guid}")]
+    public async Task<ActionResult<CustomerReadOnlyDto>> UpdateCustomer([FromRoute] Guid uuid, 
+        [FromBody] CustomerUpdateDto customerUpdateDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState
+                .Where(e => e.Value!.Errors.Any())
+                .ToDictionary(
+                    e => e.Key,
+                    e => e.Value!.Errors
+                        .Select(error => error.ErrorMessage)
+                        .ToArray());
+            throw new ValidationException(errors, "Validation Error", "ValidationError");
+        }
+        
+        if (await _applicationService.CustomerService.GetCustomerByUuidAsync(uuid) is null)
+        {
+            return NotFound();
+        }
+        
+        var returnedCustomer =  await _applicationService.CustomerService.UpdateAsync(uuid, customerUpdateDto);
+        return Ok(returnedCustomer);
+    }
+    
     [HttpGet("{id}")]
     public async Task<ActionResult<CustomerReadOnlyDto>> GetCustomerById([FromRoute] int id)
     {
