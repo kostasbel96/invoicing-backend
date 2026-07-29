@@ -59,7 +59,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
                         : query.OrderByDescending(x => x.Balance);
                     break;
 
-                case "regionΝame":
+                case "regionname":
                     query = sortOrder == "ASC"
                         ? query.OrderBy(x => x.Region.Name)
                         : query.OrderByDescending(x => x.Region.Name);
