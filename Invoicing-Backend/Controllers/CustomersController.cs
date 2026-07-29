@@ -83,4 +83,17 @@ public class CustomersController : BaseController
             .GetPaginatedCustomersAsync(page, pageSize, search, sortField, sortOrder);
         return Ok(customers);
     }
+    
+    [HttpDelete("{uuid:guid}")]
+    public async Task<ActionResult<bool>> DeleteCustomer(Guid uuid)
+    {
+        bool deleted = await _applicationService.CustomerService.DeleteAsync(uuid);
+
+        if (!deleted)
+        {
+            return NotFound(false);
+        }
+
+        return Ok(true);
+    }
 }

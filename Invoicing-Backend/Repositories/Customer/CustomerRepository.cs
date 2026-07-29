@@ -20,15 +20,16 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
         var query = context.Customers
             .Where(x => x.IsActive)
             .AsQueryable();
-
-        if (!string.IsNullOrWhiteSpace(searchTerm))
+        
+        string search = searchTerm.ToUpper();
+        if (!string.IsNullOrWhiteSpace(search))
         {
             query = query.Where(x =>
-                x.Phone.Contains(searchTerm) ||
-                x.Vat.Contains(searchTerm) ||
-                x.Firstname.Contains(searchTerm) ||
-                x.Lastname.Contains(searchTerm) ||
-                x.Email.Contains(searchTerm));
+                x.Phone.ToUpper().Contains(search) ||
+                x.Vat.ToUpper().Contains(search) ||
+                x.Firstname.ToUpper().Contains(search) ||
+                x.Lastname.ToUpper().Contains(search) ||
+                x.Email.ToUpper().Contains(search));
         }
         if (!string.IsNullOrEmpty(sortField))
         {
