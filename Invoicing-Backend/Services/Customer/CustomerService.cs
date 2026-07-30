@@ -81,7 +81,7 @@ public class CustomerService : ICustomerService
     {
         try
         {
-            if (dto.Vat != null && await _unitOfWork.CustomerRepository.VatExistsForOtherAsync(uuid, dto.Vat))
+            if (await _unitOfWork.CustomerRepository.VatExistsForOtherAsync(uuid, dto.Vat))
             {
                 _logger.LogWarning("Vat already exists: {Vat}", dto.Vat);
                 throw new CustomerFieldAlreadyExistsException("VatAlreadyExists",
@@ -94,7 +94,7 @@ public class CustomerService : ICustomerService
                 throw new CustomerFieldAlreadyExistsException("EmailAlreadyExists", 
                     "Email " + dto.Email + " already exists");
             }
-            if (dto.Phone != null && await _unitOfWork.CustomerRepository.PhoneExistsForOtherAsync(uuid, dto.Phone))
+            if (await _unitOfWork.CustomerRepository.PhoneExistsForOtherAsync(uuid, dto.Phone))
             {
                 _logger.LogWarning("Phone already exists: {Phone}", dto.Phone);
                 throw new CustomerFieldAlreadyExistsException("PhoneAlreadyExists", 

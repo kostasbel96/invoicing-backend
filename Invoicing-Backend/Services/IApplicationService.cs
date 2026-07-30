@@ -1,4 +1,5 @@
-﻿using Invoicing_Backend.Services.VatRates;
+﻿using Invoicing_Backend.Services.Items;
+using Invoicing_Backend.Services.VatRates;
 
 namespace Invoicing_Backend.Services;
 
@@ -8,4 +9,5 @@ public interface IApplicationService
     RegionService RegionService { get; }
     TaxOfficeService TaxOfficeService { get; }
     VatRateService VatRateService { get; }
+    ItemService ItemService { get; }
 }

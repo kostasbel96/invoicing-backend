@@ -1,4 +1,5 @@
 ﻿using Invoicing_Backend.Data;
+using Invoicing_Backend.Repositories.Items;
 using Invoicing_Backend.Repositories.VatRates;
 
 namespace Invoicing_Backend.Repositories;
@@ -10,6 +11,7 @@ public class UnitOfWork : IUnitOfWork
     public RegionRepository RegionRepository { get; }
     public TaxOfficeRepository TaxOfficeRepository { get; }
     public VatRateRepository VatRateRepository { get; }
+    public ItemRepository ItemRepository { get; }
     
     public UnitOfWork(InvoicingAppDbContext context)
     {
@@ -18,6 +20,7 @@ public class UnitOfWork : IUnitOfWork
         RegionRepository = new RegionRepository(context);
         TaxOfficeRepository = new TaxOfficeRepository(context);
         VatRateRepository = new VatRateRepository(context);
+        ItemRepository = new ItemRepository(context);
     }
     
     public async Task<bool> SaveAsync()

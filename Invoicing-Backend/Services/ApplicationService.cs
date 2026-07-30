@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Invoicing_Backend.Repositories;
+using Invoicing_Backend.Services.Items;
 using Invoicing_Backend.Services.VatRates;
 
 namespace Invoicing_Backend.Services;
@@ -21,4 +22,5 @@ public class ApplicationService : IApplicationService
     public RegionService RegionService => new(_unitOfWork, _mapper);
     public TaxOfficeService TaxOfficeService => new(_unitOfWork, _mapper);
     public VatRateService VatRateService => new(_unitOfWork, _mapper);
+    public ItemService ItemService => new(_unitOfWork, _mapper, _loggerFactory.CreateLogger<ItemService>());
 }

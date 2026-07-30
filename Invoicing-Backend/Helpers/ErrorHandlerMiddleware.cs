@@ -27,6 +27,7 @@ public class ErrorHandlerMiddleware
             response.StatusCode = exception switch
             {
                 CustomerFieldAlreadyExistsException => (int) HttpStatusCode.BadRequest, // 400
+                ItemFieldAlreadyExistsException => (int) HttpStatusCode.BadRequest, //400
                 ValidationException => (int) HttpStatusCode.BadRequest, //400
                 _ => (int) HttpStatusCode.InternalServerError
             };

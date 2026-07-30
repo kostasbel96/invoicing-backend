@@ -12,7 +12,6 @@ public interface ICustomerService
     Task<CustomerReadOnlyDto?> UpdateAsync(Guid uuid, CustomerUpdateDto dto);
     Task<bool> DeleteAsync(Guid uuid);
     Task<CustomerReadOnlyDto?> GetCustomerByUuidAsync(Guid uuid);
-    
     Task<CustomerReadOnlyDto?> GetCustomerByIdAsync(int id);
     
 }

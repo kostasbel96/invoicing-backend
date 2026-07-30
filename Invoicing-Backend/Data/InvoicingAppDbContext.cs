@@ -10,7 +10,7 @@ public class InvoicingAppDbContext : DbContext
     
     public virtual DbSet<Region> Regions { get; set; }
     public virtual DbSet<Customer> Customers { get; set; }
-    public virtual DbSet<Product> Products { get; set; }
+    public virtual DbSet<Item> Items { get; set; }
     public virtual DbSet<Invoice> Invoices { get; set; }
     public virtual DbSet<InvoiceItem> InvoiceItems { get; set; }
 
@@ -253,14 +253,14 @@ public class InvoicingAppDbContext : DbContext
                 .WithMany(i => i.Items)
                 .HasForeignKey(ii => ii.InvoiceId);
 
-            entity.HasOne(ii => ii.Product)
+            entity.HasOne(ii => ii.Item)
                 .WithMany(p => p.InvoiceItems)
-                .HasForeignKey(ii => ii.ProductId);
+                .HasForeignKey(ii => ii.ItemId);
         });
         
-        modelBuilder.Entity<Product>(entity =>
+        modelBuilder.Entity<Item>(entity =>
         {
-            entity.HasIndex(p => p.Name).IsUnique();
+            entity.HasIndex(i => i.Name).IsUnique();
         });
     }
     

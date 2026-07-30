@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Invoicing_Backend.Data;
 using Invoicing_Backend.DTOs;
+using Invoicing_Backend.DTOs.Item;
 using Invoicing_Backend.DTOs.TaxOffice;
 using Invoicing_Backend.DTOs.VatRate;
 
@@ -23,6 +24,11 @@ public class MapperConfig : Profile
         
         //VAT_RATE
         CreateMap<VatRate, VatRateReadOnlyDto>();
+        
+        //ITEM
+        CreateMap<Item, ItemReadOnlyDto>();
+        CreateMap<Item, ItemInsertDto>().ReverseMap();
+        CreateMap<Item, ItemUpdateDto>().ReverseMap();
     }
     
 }
