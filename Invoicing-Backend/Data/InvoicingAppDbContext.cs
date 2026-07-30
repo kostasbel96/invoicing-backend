@@ -168,6 +168,59 @@ public class InvoicingAppDbContext : DbContext
             new TaxOffice { Id = 47, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΧΙΟΥ", Code = "CHI", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow },
             new TaxOffice { Id = 48, Uuid = Guid.NewGuid(), Name = "ΔΟΥ ΣΑΜΟΥ", Code = "SAM", IsActive = true, InsertedAt = DateTime.UtcNow, ModifiedAt = DateTime.UtcNow }
         );
+        
+        modelBuilder.Entity<VatRate>().HasData(
+            new VatRate
+            {
+                Id = 1,
+                Uuid = Guid.NewGuid(),
+                Name = "24%",
+                Rate = 24m,
+                IsActive = true,
+                InsertedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow
+            },
+            new VatRate
+            {
+                Id = 2,
+                Uuid = Guid.NewGuid(),
+                Name = "17%",
+                Rate = 17m,
+                IsActive = true,
+                InsertedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow
+            },
+            new VatRate
+            {
+                Id = 3,
+                Uuid = Guid.NewGuid(),
+                Name = "13%",
+                Rate = 13m,
+                IsActive = true,
+                InsertedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow
+            },
+            new VatRate
+            {
+                Id = 4,
+                Uuid = Guid.NewGuid(),
+                Name = "6%",
+                Rate = 6m,
+                IsActive = true,
+                InsertedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow
+            },
+            new VatRate
+            {
+                Id = 5,
+                Uuid = Guid.NewGuid(),
+                Name = "0%",
+                Rate = 0m,
+                IsActive = true,
+                InsertedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow
+            }
+        );
 
         modelBuilder.Entity<Customer>(entity =>
         {

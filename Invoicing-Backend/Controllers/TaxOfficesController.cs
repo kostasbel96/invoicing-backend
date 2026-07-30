@@ -13,8 +13,8 @@ public class TaxOfficesController : BaseController
     [HttpGet]
     public async Task<ActionResult<List<TaxOfficeReadOnlyDto>>> GetTaxOffices()
     {
-        var regions = await _applicationService.TaxOfficeService.GetAllTaxOfficesAsync();
-        if (regions.Count == 0) return NotFound();
-        return Ok(regions);
+        var taxOffices = await _applicationService.TaxOfficeService.GetAllTaxOfficesAsync();
+        if (taxOffices.Count == 0) return NotFound();
+        return Ok(taxOffices);
     }
 }

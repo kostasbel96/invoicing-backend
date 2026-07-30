@@ -2,6 +2,7 @@
 using Invoicing_Backend.Data;
 using Invoicing_Backend.DTOs;
 using Invoicing_Backend.DTOs.TaxOffice;
+using Invoicing_Backend.DTOs.VatRate;
 
 namespace Invoicing_Backend.Configuration;
 
@@ -19,6 +20,9 @@ public class MapperConfig : Profile
         
         //TAX_OFFICE
         CreateMap<TaxOffice, TaxOfficeReadOnlyDto>();
+        
+        //VAT_RATE
+        CreateMap<VatRate, VatRateReadOnlyDto>();
     }
     
 }
