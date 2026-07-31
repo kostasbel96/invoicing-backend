@@ -109,7 +109,7 @@ public class ItemService : IItemService
         try
         {
             Item? item = await _unitOfWork.ItemRepository
-                .GetByUuidAsync(uuid);
+                .GetByUuidAsync(uuid, (x => x.VatRate));
             if (item is null)
             {
                 _logger.LogWarning("Item with Uuid {Uuid} not found", uuid);
