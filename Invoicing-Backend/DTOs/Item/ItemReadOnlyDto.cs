@@ -11,5 +11,4 @@ public class ItemReadOnlyDto : BaseReadOnlyDto
     public decimal Price { get; set; }
     public Unit Unit { get; set; }
     public int Quantity { get; set; }
-    public VatRateReadOnlyDto VatRate { get; set; }
 }

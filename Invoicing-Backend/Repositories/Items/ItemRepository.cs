@@ -49,7 +49,6 @@ public class ItemRepository : BaseRepository<Item>, IItemRepository
         int skip = pageNumber * pageSize;
 
         var items = await query
-            .Include(x => x.VatRate)
             .Skip(skip)
             .Take(pageSize)
             .ToListAsync();

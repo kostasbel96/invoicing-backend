@@ -24,7 +24,4 @@ public class ItemUpdateDto
     [Required(ErrorMessage = "The {0} field is required.")]
     [Range(0, int.MaxValue, ErrorMessage = "Quantity cannot be negative.")]
     public int Quantity { get; set; }
-    
-    [Required(ErrorMessage = "The {0} field is required.")]
-    public int VatRateId { get; set; }
 }
