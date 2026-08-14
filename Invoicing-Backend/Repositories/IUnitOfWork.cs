@@ -9,6 +9,6 @@ public interface IUnitOfWork
     RegionRepository RegionRepository { get; }
     TaxOfficeRepository TaxOfficeRepository { get; }
     VatRateRepository VatRateRepository { get; }
-    ItemRepository ItemRepository { get; }
+    ProductRepository ProductRepository { get; }
     Task<bool> SaveAsync();
 }

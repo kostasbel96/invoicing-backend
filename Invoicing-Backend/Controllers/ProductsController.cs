@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Invoicing_Backend.Controllers;
 
-public class ItemsController : BaseController
+public class ProductsController : BaseController
 {
-    public ItemsController(IApplicationService applicationService) : base(applicationService)
+    public ProductsController(IApplicationService applicationService) : base(applicationService)
     {
     }
 
     [HttpPost("Add")]
-    public async Task<ActionResult<ItemReadOnlyDto>> AddItem([FromBody] ItemInsertDto itemInsertDto)
+    public async Task<ActionResult<ProductReadOnlyDto>> AddProduct([FromBody] ProductInsertDto productInsertDto)
     {
         if (!ModelState.IsValid)
         {
@@ -28,15 +28,15 @@ public class ItemsController : BaseController
             throw new ValidationException(errors, "Validation Error", "ValidationError");
         }
 
-        var returnedItem = await _applicationService.ItemService.AddAsync(itemInsertDto);
+        var returnedItem = await _applicationService.ProductService.AddAsync(productInsertDto);
 
         return CreatedAtAction(nameof(GetItemById), new { id = returnedItem.Id }, returnedItem);
     }
 
     [HttpPatch("Update/{uuid:guid}")]
-    public async Task<ActionResult<ItemReadOnlyDto>> UpdateItem(
+    public async Task<ActionResult<ProductReadOnlyDto>> UpdateItem(
         [FromRoute] Guid uuid,
-        [FromBody] ItemUpdateDto itemUpdateDto)
+        [FromBody] ProductUpdateDto productUpdateDto)
     {
         if (!ModelState.IsValid)
         {
@@ -51,20 +51,20 @@ public class ItemsController : BaseController
             throw new ValidationException(errors, "Validation Error", "ValidationError");
         }
 
-        if (await _applicationService.ItemService.GetItemByUuidAsync(uuid) is null)
+        if (await _applicationService.ProductService.GetItemByUuidAsync(uuid) is null)
         {
             return NotFound();
         }
 
-        var returnedItem = await _applicationService.ItemService.UpdateAsync(uuid, itemUpdateDto);
+        var returnedItem = await _applicationService.ProductService.UpdateAsync(uuid, productUpdateDto);
 
         return Ok(returnedItem);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ItemReadOnlyDto>> GetItemById([FromRoute] int id)
+    public async Task<ActionResult<ProductReadOnlyDto>> GetItemById([FromRoute] int id)
     {
-        var item = await _applicationService.ItemService.GetItemByIdAsync(id);
+        var item = await _applicationService.ProductService.GetItemByIdAsync(id);
 
         if (item is null)
         {
@@ -75,9 +75,9 @@ public class ItemsController : BaseController
     }
 
     [HttpGet("by-uuid/{uuid:guid}")]
-    public async Task<ActionResult<ItemReadOnlyDto>> GetItemByUuid([FromRoute] Guid uuid)
+    public async Task<ActionResult<ProductReadOnlyDto>> GetItemByUuid([FromRoute] Guid uuid)
     {
-        var item = await _applicationService.ItemService.GetItemByUuidAsync(uuid);
+        var item = await _applicationService.ProductService.GetItemByUuidAsync(uuid);
 
         if (item is null)
         {
@@ -88,15 +88,15 @@ public class ItemsController : BaseController
     }
 
     [HttpGet]
-    public async Task<ActionResult<PaginatedResult<ItemReadOnlyDto>>> GetItems(
+    public async Task<ActionResult<PaginatedResult<ProductReadOnlyDto>>> GetItems(
         [FromQuery] int page,
         [FromQuery] int pageSize,
         [FromQuery] string search = "",
         [FromQuery] string sortField = "Id",
         [FromQuery] string sortOrder = "ASC")
     {
-        var items = await _applicationService.ItemService
-            .GetPaginatedItemsAsync(page, pageSize, search, sortField, sortOrder);
+        var items = await _applicationService.ProductService
+            .GetPaginatedProductsAsync(page, pageSize, search, sortField, sortOrder);
 
         return Ok(items);
     }
@@ -104,7 +104,7 @@ public class ItemsController : BaseController
     [HttpDelete("{uuid:guid}")]
     public async Task<ActionResult<bool>> DeleteItem(Guid uuid)
     {
-        bool deleted = await _applicationService.ItemService.DeleteAsync(uuid);
+        bool deleted = await _applicationService.ProductService.DeleteAsync(uuid);
 
         if (!deleted)
         {

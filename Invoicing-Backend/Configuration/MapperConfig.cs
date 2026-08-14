@@ -26,9 +26,9 @@ public class MapperConfig : Profile
         CreateMap<VatRate, VatRateReadOnlyDto>();
         
         //ITEM
-        CreateMap<Item, ItemReadOnlyDto>();
-        CreateMap<Item, ItemInsertDto>().ReverseMap();
-        CreateMap<Item, ItemUpdateDto>().ReverseMap();
+        CreateMap<Product, ProductReadOnlyDto>();
+        CreateMap<Product, ProductInsertDto>().ReverseMap();
+        CreateMap<Product, ProductUpdateDto>().ReverseMap();
     }
     
 }

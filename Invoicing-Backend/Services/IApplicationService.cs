@@ -9,5 +9,5 @@ public interface IApplicationService
     RegionService RegionService { get; }
     TaxOfficeService TaxOfficeService { get; }
     VatRateService VatRateService { get; }
-    ItemService ItemService { get; }
+    ProductService ProductService { get; }
 }

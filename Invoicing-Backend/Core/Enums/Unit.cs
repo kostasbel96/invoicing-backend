@@ -4,7 +4,6 @@ public enum Unit
 {
     Piece,
     Hour,
-    Day,
     Kg,
     Meter,
     Liter

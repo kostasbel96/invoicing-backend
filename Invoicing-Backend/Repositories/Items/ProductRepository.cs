@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Invoicing_Backend.Repositories.Items;
 
-public class ItemRepository : BaseRepository<Item>, IItemRepository
+public class ProductRepository : BaseRepository<Product>, IProductRepository
 {
-    public ItemRepository(InvoicingAppDbContext context) : base(context)
+    public ProductRepository(InvoicingAppDbContext context) : base(context)
     {
     }
 
-    public async Task<PaginatedResult<Item>> GetPaginatedItemsAsync(int pageNumber, 
+    public async Task<PaginatedResult<Product>> GetPaginatedProductsAsync(int pageNumber, 
         int pageSize, string searchTerm, string sortField, string sortOrder)
     {
-        var query = context.Items
+        var query = context.Products
             .Where(x => x.IsActive)
             .AsQueryable();
         
@@ -53,7 +53,7 @@ public class ItemRepository : BaseRepository<Item>, IItemRepository
             .Take(pageSize)
             .ToListAsync();
 
-        return new PaginatedResult<Item>
+        return new PaginatedResult<Product>
         {
             Data = items,
             TotalRecords = totalRecords,
@@ -62,9 +62,9 @@ public class ItemRepository : BaseRepository<Item>, IItemRepository
         };
     }
 
-    public async Task AddAsync(Item item) => await dbset.AddAsync(item);
+    public async Task AddAsync(Product item) => await dbset.AddAsync(item);
 
-    public Task UpdateAsync(Item item)
+    public Task UpdateAsync(Product item)
     {
         dbset.Attach(item);
         context.Entry(item).State = EntityState.Modified; 
@@ -73,7 +73,7 @@ public class ItemRepository : BaseRepository<Item>, IItemRepository
 
     public async Task<bool> DeleteAsync(int id)
     {
-        Item? existingItem = await GetByIdAsync(id);
+        Product? existingItem = await GetByIdAsync(id);
         if (existingItem is null) return false;
         dbset.Remove(existingItem);
         return true;

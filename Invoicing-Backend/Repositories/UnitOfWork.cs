@@ -11,7 +11,7 @@ public class UnitOfWork : IUnitOfWork
     public RegionRepository RegionRepository { get; }
     public TaxOfficeRepository TaxOfficeRepository { get; }
     public VatRateRepository VatRateRepository { get; }
-    public ItemRepository ItemRepository { get; }
+    public ProductRepository ProductRepository { get; }
     
     public UnitOfWork(InvoicingAppDbContext context)
     {
@@ -20,7 +20,7 @@ public class UnitOfWork : IUnitOfWork
         RegionRepository = new RegionRepository(context);
         TaxOfficeRepository = new TaxOfficeRepository(context);
         VatRateRepository = new VatRateRepository(context);
-        ItemRepository = new ItemRepository(context);
+        ProductRepository = new ProductRepository(context);
     }
     
     public async Task<bool> SaveAsync()

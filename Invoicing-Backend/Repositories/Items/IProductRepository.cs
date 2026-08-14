@@ -3,12 +3,12 @@ using Invoicing_Backend.Models;
 
 namespace Invoicing_Backend.Repositories.Items;
 
-public interface IItemRepository
+public interface IProductRepository
 {
-    Task<PaginatedResult<Item>> GetPaginatedItemsAsync(int pageNumber, int pageSize, 
+    Task<PaginatedResult<Product>> GetPaginatedProductsAsync(int pageNumber, int pageSize, 
         string searchTerm, string sortField, string sortOrder);
-    Task AddAsync(Item item);
-    Task UpdateAsync(Item item);
+    Task AddAsync(Product product);
+    Task UpdateAsync(Product product);
     Task<bool> DeleteAsync(int id);
     Task<bool> NameExistsAsync(string name);
     Task<bool> NameExistsForOtherAsync(Guid uuid, string name);

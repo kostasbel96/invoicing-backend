@@ -10,7 +10,8 @@ public class InvoicingAppDbContext : DbContext
     
     public virtual DbSet<Region> Regions { get; set; }
     public virtual DbSet<Customer> Customers { get; set; }
-    public virtual DbSet<Item> Items { get; set; }
+    public virtual DbSet<Product> Products { get; set; }
+    public virtual DbSet<ServiceItem> ServiceItems { get; set; }
     public virtual DbSet<Invoice> Invoices { get; set; }
     public virtual DbSet<InvoiceItem> InvoiceItems { get; set; }
 
@@ -253,12 +254,21 @@ public class InvoicingAppDbContext : DbContext
                 .WithMany(i => i.Items)
                 .HasForeignKey(ii => ii.InvoiceId);
 
-            entity.HasOne(ii => ii.Item)
+            entity.HasOne(ii => ii.Product)
                 .WithMany(p => p.InvoiceItems)
-                .HasForeignKey(ii => ii.ItemId);
+                .HasForeignKey(ii => ii.ProductId);
+
+            entity.HasOne(ii => ii.ServiceItem)
+                .WithMany(s => s.InvoiceItems)
+                .HasForeignKey(ii => ii.ServiceItemId);
         });
         
-        modelBuilder.Entity<Item>(entity =>
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.HasIndex(i => i.Name).IsUnique();
+        });
+        
+        modelBuilder.Entity<ServiceItem>(entity =>
         {
             entity.HasIndex(i => i.Name).IsUnique();
         });
