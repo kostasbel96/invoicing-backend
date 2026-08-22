@@ -33,7 +33,25 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
                         ? query.OrderBy(x => x.Name)
                         : query.OrderByDescending(x => x.Name);
                     break;
+                
+                case "description":
+                    query = sortOrder == "ASC"
+                        ? query.OrderBy(x => x.Description)
+                        : query.OrderByDescending(x => x.Description);
+                    break;
+                
+                case "price":
+                    query = sortOrder == "ASC"
+                        ? query.OrderBy(x => x.Price)
+                        : query.OrderByDescending(x => x.Price);
+                    break;
 
+                case "quantity":
+                    query = sortOrder == "ASC"
+                        ? query.OrderBy(x => x.Quantity)
+                        : query.OrderByDescending(x => x.Quantity);
+                    break;
+                
                 default:
                     query = query.OrderBy(x => x.Id);
                     break;
