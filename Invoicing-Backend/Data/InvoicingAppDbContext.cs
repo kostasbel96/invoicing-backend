@@ -233,9 +233,9 @@ public class InvoicingAppDbContext : DbContext
                 .WithMany()
                 .HasForeignKey(c => c.TaxOfficeId);
 
-            entity.HasIndex(c => c.Email).IsUnique();
-            entity.HasIndex(c => c.Phone).IsUnique();
-            entity.HasIndex(c => c.Vat).IsUnique();
+            entity.HasIndex(c => c.Email).IsUnique().HasFilter("\"IsActive\" = true");;
+            entity.HasIndex(c => c.Phone).IsUnique().HasFilter("\"IsActive\" = true");;
+            entity.HasIndex(c => c.Vat).IsUnique().HasFilter("\"IsActive\" = true");;
             entity.HasIndex(c => new { c.Firstname, c.Lastname });
         });
 
@@ -245,7 +245,7 @@ public class InvoicingAppDbContext : DbContext
                 .WithMany()
                 .HasForeignKey(i => i.CustomerId);
 
-            entity.HasIndex(i => i.InvoiceNumber).IsUnique();
+            entity.HasIndex(i => i.InvoiceNumber).IsUnique().HasFilter("\"IsActive\" = true");;
         });
 
         modelBuilder.Entity<InvoiceItem>(entity =>
@@ -265,12 +265,12 @@ public class InvoicingAppDbContext : DbContext
         
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasIndex(i => i.Name).IsUnique();
+            entity.HasIndex(i => i.Name).IsUnique().HasFilter("\"IsActive\" = true");;
         });
         
         modelBuilder.Entity<ServiceItem>(entity =>
         {
-            entity.HasIndex(i => i.Name).IsUnique();
+            entity.HasIndex(i => i.Name).IsUnique().HasFilter("\"IsActive\" = true");;
         });
     }
     
