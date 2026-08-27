@@ -99,12 +99,12 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
 
     public async Task<bool> NameExistsAsync(string name)
     {
-        return await dbset.AnyAsync(x => x.Name == name);
+        return await dbset.Where(x => x.IsActive).AnyAsync(x => x.Name == name);
     }
 
     public async Task<bool> NameExistsForOtherAsync(Guid uuid, string name)
     {
-        return await dbset.AnyAsync(x =>
+        return await dbset.Where(x => x.IsActive).AnyAsync(x =>
             x.Name == name &&
             x.Uuid != uuid);
     }

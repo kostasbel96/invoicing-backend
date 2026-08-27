@@ -114,36 +114,38 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 
     public async Task<bool> EmailExistsAsync(string email)
     {
-        return await dbset.AnyAsync(x => x.Email == email);
+        return await dbset.Where(x=> x.IsActive).AnyAsync(x => x.Email == email);
     }
     
     public async Task<bool> EmailExistsForOtherAsync(Guid uuid, string email)
     {
-        return await dbset.AnyAsync(x =>
+        return await dbset.Where(x=> x.IsActive)
+            .AnyAsync(x =>
             x.Email == email &&
             x.Uuid != uuid);
     }
     
     public async Task<bool> PhoneExistsAsync(string phone)
     {
-        return await dbset.AnyAsync(x => x.Phone == phone);
+        return await dbset.Where(x=> x.IsActive).AnyAsync(x => x.Phone == phone);
     }
     
     public async Task<bool> PhoneExistsForOtherAsync(Guid uuid, string phone)
     {
-        return await dbset.AnyAsync(x =>
+        return await dbset.Where(x=> x.IsActive)
+            .AnyAsync(x =>
             x.Phone == phone &&
             x.Uuid != uuid);
     }
     
     public async Task<bool> VatExistsAsync(string vat)
     {
-        return await dbset.AnyAsync(x => x.Vat == vat);
+        return await dbset.Where(x=> x.IsActive).AnyAsync(x => x.Vat == vat);
     }
     
     public async Task<bool> VatExistsForOtherAsync(Guid uuid, string vat)
     {
-        return await dbset.AnyAsync(x =>
+        return await dbset.Where(x=> x.IsActive).AnyAsync(x =>
             x.Vat == vat &&
             x.Uuid != uuid);
     }
