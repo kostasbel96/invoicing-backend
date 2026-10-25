@@ -10,4 +10,5 @@ public interface IApplicationService
     TaxOfficeService TaxOfficeService { get; }
     VatRateService VatRateService { get; }
     ProductService ProductService { get; }
+    ServiceItemService ServiceItemService { get; }
 }

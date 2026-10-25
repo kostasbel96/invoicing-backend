@@ -23,4 +23,5 @@ public class ApplicationService : IApplicationService
     public TaxOfficeService TaxOfficeService => new(_unitOfWork, _mapper);
     public VatRateService VatRateService => new(_unitOfWork, _mapper);
     public ProductService ProductService => new(_unitOfWork, _mapper, _loggerFactory.CreateLogger<ProductService>());
+    public ServiceItemService ServiceItemService => new(_unitOfWork, _mapper, _loggerFactory.CreateLogger<ServiceItemService>());
 }
