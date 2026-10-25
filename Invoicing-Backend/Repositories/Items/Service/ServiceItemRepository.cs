@@ -2,24 +2,24 @@
 using Invoicing_Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Invoicing_Backend.Repositories.Items;
+namespace Invoicing_Backend.Repositories.Items.Service;
 
-public class ProductRepository : BaseRepository<Product>, IProductRepository
+public class ServiceItemRepository : BaseRepository<ServiceItem>, IItemRepository
 {
-    public ProductRepository(InvoicingAppDbContext context) : base(context)
+    public ServiceItemRepository(InvoicingAppDbContext context) : base(context)
     {
     }
 
-    public async Task<PaginatedResult<Product>> GetPaginatedProductsAsync(int pageNumber, 
-        int pageSize, string searchTerm, string sortField, string sortOrder)
+    public async Task<PaginatedResult<Item>> GetPaginatedItemsAsync(int pageNumber, int pageSize, string searchTerm, string sortField, string sortOrder)
     {
-        var query = context.Products
+        var query = context.ServiceItems
+            .AsNoTracking()
             .Where(x => x.IsActive)
             .AsQueryable();
         
-        string search = searchTerm.ToUpper();
-        if (!string.IsNullOrWhiteSpace(search))
+        if (!string.IsNullOrWhiteSpace(searchTerm))
         {
+            string search = searchTerm.ToUpper();
             query = query.Where(x =>
                 x.Name.ToUpper().Contains(search)
             );
@@ -45,12 +45,6 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
                         ? query.OrderBy(x => x.Price)
                         : query.OrderByDescending(x => x.Price);
                     break;
-
-                case "quantity":
-                    query = sortOrder == "ASC"
-                        ? query.OrderBy(x => x.Quantity)
-                        : query.OrderByDescending(x => x.Quantity);
-                    break;
                 
                 default:
                     query = query.OrderBy(x => x.Id);
@@ -71,29 +65,29 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
             .Take(pageSize)
             .ToListAsync();
 
-        return new PaginatedResult<Product>
+        return new PaginatedResult<Item>
         {
-            Data = items,
+            Data = items.Cast<Item>().ToList(),
             TotalRecords = totalRecords,
             PageNumber = pageNumber,
             PageSize = pageSize
         };
     }
 
-    public async Task AddAsync(Product item) => await dbset.AddAsync(item);
+    public async Task AddAsync(Item item) => await dbset.AddAsync((ServiceItem)item);
 
-    public Task UpdateAsync(Product item)
+    public Task UpdateAsync(Item item)
     {
-        dbset.Attach(item);
+        dbset.Attach((ServiceItem) item);
         context.Entry(item).State = EntityState.Modified; 
         return Task.CompletedTask;
     }
 
     public async Task<bool> DeleteAsync(int id)
     {
-        Product? existingItem = await GetByIdAsync(id);
+        ServiceItem? existingItem = await GetByIdAsync(id);
         if (existingItem is null) return false;
-        dbset.Remove(existingItem);
+        existingItem.IsActive = false;
         return true;
     }
 

@@ -1,5 +1,7 @@
 ﻿using Invoicing_Backend.Data;
 using Invoicing_Backend.Repositories.Items;
+using Invoicing_Backend.Repositories.Items.Product;
+using Invoicing_Backend.Repositories.Items.Service;
 using Invoicing_Backend.Repositories.VatRates;
 
 namespace Invoicing_Backend.Repositories;
@@ -13,6 +15,8 @@ public class UnitOfWork : IUnitOfWork
     public VatRateRepository VatRateRepository { get; }
     public ProductRepository ProductRepository { get; }
     
+    public ServiceItemRepository ServiceItemRepository { get; }
+
     public UnitOfWork(InvoicingAppDbContext context)
     {
         _context = context;
@@ -21,6 +25,7 @@ public class UnitOfWork : IUnitOfWork
         TaxOfficeRepository = new TaxOfficeRepository(context);
         VatRateRepository = new VatRateRepository(context);
         ProductRepository = new ProductRepository(context);
+        ServiceItemRepository = new ServiceItemRepository(context);
     }
     
     public async Task<bool> SaveAsync()

@@ -108,7 +108,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
         Customer? existingCustomer = await GetByIdAsync(id);
         if (existingCustomer is null) return false;
-        dbset.Remove(existingCustomer);
+        existingCustomer.IsActive = false;
         return true;
     }
 

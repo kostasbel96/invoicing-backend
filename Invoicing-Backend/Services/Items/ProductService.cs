@@ -6,7 +6,7 @@ using Invoicing_Backend.Repositories;
 
 namespace Invoicing_Backend.Services.Items;
 
-public class ProductService : IProductService
+public class ProductService : IItemService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -19,25 +19,26 @@ public class ProductService : IProductService
         _logger = logger;
     }
 
-    public async Task<PaginatedResult<ProductReadOnlyDto>> GetPaginatedProductsAsync(int pageNumber, int pageSize, string searchTerm, string sortField, string sortOrder)
+    public async Task<PaginatedResult<ItemReadOnlyDto>> GetPaginatedItemsAsync(int pageNumber, int pageSize, string searchTerm, string sortField, string sortOrder)
     {
-        PaginatedResult<Product> result = await _unitOfWork.ProductRepository
-            .GetPaginatedProductsAsync(pageNumber, 
+        PaginatedResult<Item> result = await _unitOfWork.ProductRepository
+            .GetPaginatedItemsAsync(pageNumber, 
                 pageSize, 
                 searchTerm,
                 sortField,
                 sortOrder);
 
-        return new PaginatedResult<ProductReadOnlyDto>
+        return new PaginatedResult<ItemReadOnlyDto>
         {
-            Data = _mapper.Map<List<ProductReadOnlyDto>>(result.Data),
+            Data = _mapper.Map<List<ItemReadOnlyDto>>(result.Data),
             TotalRecords = result.TotalRecords,
             PageNumber = result.PageNumber,
             PageSize = result.PageSize
         };
     }
+    
 
-    public async Task<ProductReadOnlyDto> AddAsync(ProductInsertDto dto)
+    public async Task<ItemReadOnlyDto> AddAsync(ItemInsertDto dto)
     {
         try
         {
@@ -48,7 +49,7 @@ public class ProductService : IProductService
                     "Item Name " + dto.Name + " already exists");
             }
             
-            Product item = _mapper.Map<Product>(dto);
+            ProductItem item = _mapper.Map<ProductItem>(dto);
             await _unitOfWork.ProductRepository.AddAsync(item);
             await _unitOfWork.SaveAsync();
             _logger.LogInformation("Item {ItemId} added successfully", item.Id);
@@ -61,7 +62,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<ProductReadOnlyDto?> UpdateAsync(Guid uuid, ProductUpdateDto dto)
+    public async Task<ItemReadOnlyDto?> UpdateAsync(Guid uuid, ItemUpdateDto dto)
     {
         try
         {
@@ -72,7 +73,7 @@ public class ProductService : IProductService
                     "Item Name " + dto.Name + " already exists");
             }
 
-            Product? item = await _unitOfWork.ProductRepository.GetByUuidAsync(uuid);
+            ProductItem? item = await _unitOfWork.ProductRepository.GetByUuidAsync(uuid);
             if (item is null) return null;
             _mapper.Map(dto, item);
             await _unitOfWork.SaveAsync();
@@ -90,7 +91,7 @@ public class ProductService : IProductService
     {
         try
         {
-            Product? item = await _unitOfWork.ProductRepository.GetByUuidAsync(uuid);
+            ProductItem? item = await _unitOfWork.ProductRepository.GetByUuidAsync(uuid);
             if (item is null) return false;
             item.IsActive = false;
             await _unitOfWork.SaveAsync();
@@ -104,11 +105,11 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<ProductReadOnlyDto?> GetItemByUuidAsync(Guid uuid)
+    public async Task<ItemReadOnlyDto?> GetItemByUuidAsync(Guid uuid)
     {
         try
         {
-            Product? item = await _unitOfWork.ProductRepository
+            ProductItem? item = await _unitOfWork.ProductRepository
                 .GetByUuidAsync(uuid);
             if (item is null)
             {
@@ -126,9 +127,9 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<ProductReadOnlyDto?> GetItemByIdAsync(int id)
+    public async Task<ItemReadOnlyDto?> GetItemByIdAsync(int id)
     {
-        Product? item = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+        ProductItem? item = await _unitOfWork.ProductRepository.GetByIdAsync(id);
         if (item is null) return null;
         return _mapper.Map<ProductReadOnlyDto>(item);
     }

@@ -96,7 +96,7 @@ public class ProductsController : BaseController
         [FromQuery] string sortOrder = "ASC")
     {
         var items = await _applicationService.ProductService
-            .GetPaginatedProductsAsync(page, pageSize, search, sortField, sortOrder);
+            .GetPaginatedItemsAsync(page, pageSize, search, sortField, sortOrder);
 
         return Ok(items);
     }

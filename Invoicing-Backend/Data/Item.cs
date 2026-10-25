@@ -1,12 +1,10 @@
 ﻿namespace Invoicing_Backend.Data;
 
-public class Product : BaseEntity
+public abstract class Item : BaseEntity
 {
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
     public decimal Price { get; set; }
-    public Unit Unit { get; set; }
-    public decimal? Quantity { get; set; }
 
     public List<InvoiceItem> InvoiceItems { get; set; } = new();
 }

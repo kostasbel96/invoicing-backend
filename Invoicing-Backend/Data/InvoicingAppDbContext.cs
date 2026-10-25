@@ -10,7 +10,7 @@ public class InvoicingAppDbContext : DbContext
     
     public virtual DbSet<Region> Regions { get; set; }
     public virtual DbSet<Customer> Customers { get; set; }
-    public virtual DbSet<Product> Products { get; set; }
+    public virtual DbSet<ProductItem> Products { get; set; }
     public virtual DbSet<ServiceItem> ServiceItems { get; set; }
     public virtual DbSet<Invoice> Invoices { get; set; }
     public virtual DbSet<InvoiceItem> InvoiceItems { get; set; }
@@ -263,7 +263,7 @@ public class InvoicingAppDbContext : DbContext
                 .HasForeignKey(ii => ii.ServiceItemId);
         });
         
-        modelBuilder.Entity<Product>(entity =>
+        modelBuilder.Entity<ProductItem>(entity =>
         {
             entity.HasIndex(i => i.Name).IsUnique().HasFilter("\"IsActive\" = true");;
         });

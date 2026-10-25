@@ -6,7 +6,7 @@ public class InvoiceItem : BaseEntity
     public Invoice Invoice { get; set; } = null!;
     
     public int? ProductId { get; set; }
-    public Product? Product { get; set; }
+    public ProductItem? Product { get; set; }
 
     public int? ServiceItemId { get; set; }
     public ServiceItem? ServiceItem { get; set; }
